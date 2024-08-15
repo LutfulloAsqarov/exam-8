@@ -1,16 +1,22 @@
 import React from "react";
-import NewProducts from "./new-products/NewProducts";
-import TopProducts from "./top-products/TopProducts";
-import Browse from "./browse/Browse";
+import Hero from "../../components/hero/Hero";
+import Partner from "../../components/partner/Partner";
+import NewProducts from "../../components/new-products/NewProducts";
+import TopProducts from "../../components/top-products/TopProducts";
+import Browse from "../../components/browse/Browse";
+import SwiperComp from "../../components/swiper/Swiper";
 
 const Home = () => {
-    return (
-        <div>
-            <NewProducts />
-            <TopProducts />
-            <Browse />
-        </div>
-    );
+  return (
+    <>
+      <Hero />
+      <Partner />
+      <NewProducts />
+      <TopProducts />
+      <Browse />
+      <SwiperComp />
+    </>
+  );
 };
 
 export default Home;
