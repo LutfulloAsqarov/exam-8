@@ -3,8 +3,8 @@
     background-position: left;
     background-repeat: no-repeat;
     background-size: cover;
-    height: 90vh;
-    padding: 40px 0px;
+    height: 80vh;
+    padding: 100px 0px;
     &__left {
         display: flex;
         flex-direction: column;
@@ -54,6 +54,9 @@
     }
 
     &__left__result__card {
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
         h1 {
             font-size: 40px;
             font-weight: 700;

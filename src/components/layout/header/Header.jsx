@@ -8,6 +8,7 @@ import { IoSearchOutline } from "react-icons/io5";
 
 import "./header.scss";
 import Search from "../../search/Search";
+import { Link } from "react-router-dom";
 
 const Header = () => {
     const [close, setClose] = useState(true);
@@ -42,7 +43,9 @@ const Header = () => {
                             onClick={() => setShow(true)}
                             className="header__nav__logo-menu"
                         />
-                        <img src={logo} alt="" />
+                        <Link to={"/"}>
+                            <img src={logo} alt="" />
+                        </Link>
                     </div>
                     <ul
                         className={`header__nav__link ${

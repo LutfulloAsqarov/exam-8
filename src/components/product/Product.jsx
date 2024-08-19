@@ -4,11 +4,12 @@ import "./product.scss";
 import { GoStarFill } from "react-icons/go";
 
 const Product = ({ product }) => {
+    console.log(product);
     return (
         <div className="products__card">
             <div className="products__card__img">
-                <Link to={"#"}>
-                    <img src={product.img} alt="card-img" />
+                <Link to={`/product/${product?._id}`}>
+                    <img src={product?.urls[0]} alt="card-img" />
                 </Link>
             </div>
             <div className="products__card__content">
@@ -21,14 +22,14 @@ const Product = ({ product }) => {
                         <GoStarFill color="gold" />
                         <GoStarFill color="gold" />
                     </div>
-                    <p>{product.rate}.0</p>
+                    <p>{product?.rating}.0</p>
                 </div>
                 <div className="products__card__price">
                     <p className="products__card__price-new">
-                        ${product.price}
+                        ${product?.price}
                     </p>
                     <p className="products__card__price-old">
-                        ${product.oldPrice}
+                        ${product?.oldPrice}
                     </p>
                 </div>
             </div>
