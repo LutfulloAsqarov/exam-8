@@ -1,5 +1,6 @@
 .products {
     &__card {
+        position: relative;
         &__img {
             img {
                 width: 100%;
@@ -45,6 +46,29 @@
                 color: gray;
                 text-decoration: line-through;
             }
+        }
+
+        .like-btn {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            border: none;
+            font-size: 18px;
+        }
+
+        .cart-btn {
+            position: absolute;
+            right: 10px;
+            bottom: 20px;
+            border: 1px solid #ddd;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            font-size: 18px;
+            color: gray;
+            // display: flex;
+            display: grid;
+            place-items: center;
         }
     }
     @media (max-width: 950px) {

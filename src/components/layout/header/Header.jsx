@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { IoCloseSharp } from "react-icons/io5";
 import logo from "../../../assets/images/logo.png";
-import { BsCart2 } from "react-icons/bs";
+import { BsCart2, BsHeart } from "react-icons/bs";
 import { VscAccount } from "react-icons/vsc";
 import { RxHamburgerMenu } from "react-icons/rx";
 import { IoSearchOutline } from "react-icons/io5";
@@ -70,7 +70,12 @@ const Header = () => {
                         <div className="header__nav__btns-search">
                             <IoSearchOutline />
                         </div>
-                        <BsCart2 />
+                        <Link to={"/cart"}>
+                            <BsCart2 />
+                        </Link>
+                        <Link to={"/wishlist"}>
+                            <BsHeart />
+                        </Link>
                         <VscAccount />
                     </div>
                 </nav>

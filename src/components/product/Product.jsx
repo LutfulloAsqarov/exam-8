@@ -2,9 +2,15 @@ import React from "react";
 import { Link } from "react-router-dom";
 import "./product.scss";
 import { GoStarFill } from "react-icons/go";
+import { useDispatch, useSelector } from "react-redux";
+import { addToCart } from "../../context/slices/cartSlice";
+import { toggleHeart } from "../../context/slices/wishlistSlice";
+import { BsCart2, BsHeart } from "react-icons/bs";
 
 const Product = ({ product }) => {
-    console.log(product);
+    let wishlistData = useSelector((state) => state.wishlist.value);
+    console.log(wishlistData);
+    let dispatch = useDispatch();
     return (
         <div className="products__card">
             <div className="products__card__img">
@@ -33,6 +39,18 @@ const Product = ({ product }) => {
                     </p>
                 </div>
             </div>
+            <button
+                className="like-btn"
+                onClick={() => dispatch(toggleHeart(product))}
+            >
+                <BsHeart />
+            </button>
+            <button
+                className="cart-btn"
+                onClick={() => dispatch(addToCart(product))}
+            >
+                <BsCart2 />
+            </button>
         </div>
     );
 };
