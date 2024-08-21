@@ -9,7 +9,6 @@ import { BsCart2, BsHeart } from "react-icons/bs";
 
 const Product = ({ product }) => {
     let wishlistData = useSelector((state) => state.wishlist.value);
-    console.log(wishlistData);
     let dispatch = useDispatch();
     return (
         <div className="products__card">

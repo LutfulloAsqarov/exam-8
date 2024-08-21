@@ -1,0 +1,12 @@
+.manageProduct {
+    padding: 30px;
+    &__cards {
+        display: flex;
+        align-items: start;
+        flex-wrap: wrap;
+        gap: 24px;
+    }
+    .products__card {
+        width: calc(25% - 18px);
+    }
+}

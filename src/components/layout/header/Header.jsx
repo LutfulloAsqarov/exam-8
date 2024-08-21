@@ -8,11 +8,15 @@ import { IoSearchOutline } from "react-icons/io5";
 
 import "./header.scss";
 import Search from "../../search/Search";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 
 const Header = () => {
     const [close, setClose] = useState(true);
     const [show, setShow] = useState(false);
+    let { pathname } = useLocation();
+    if (pathname.includes("login") || pathname.includes("admin")) {
+        return <></>;
+    }
     return (
         <>
             {close ? (
@@ -76,7 +80,9 @@ const Header = () => {
                         <Link to={"/wishlist"}>
                             <BsHeart />
                         </Link>
-                        <VscAccount />
+                        <Link to={"/login"}>
+                            <VscAccount />
+                        </Link>
                     </div>
                 </nav>
             </header>
