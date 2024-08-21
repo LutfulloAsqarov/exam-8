@@ -9,7 +9,7 @@ import { FiEyeOff } from "react-icons/fi";
 import { useSignInMutation } from "../../context/api/adminApi";
 
 const Login = () => {
-    const [username, setUsername] = useState("john33");
+    const [username, setUsername] = useState("ali32");
     const [password, setPassword] = useState("12345678");
     const [showPass, setShowPass] = useState(false);
 
@@ -23,7 +23,7 @@ const Login = () => {
     useEffect(() => {
         if (isSuccess) {
             dispatch(setToken(data.payload.token));
-            navigate("/admin");
+            navigate("/admin/createProduct");
             // dispatch(setUser(data.admin));
         }
         if (isError) {

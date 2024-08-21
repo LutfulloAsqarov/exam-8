@@ -14,6 +14,8 @@ import CreateProduct from "./pages/admin/create-product/CreateProduct";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import ManageProduct from "./pages/admin/manage-product/ManageProduct";
+import CreateCategory from "./pages/admin/create-category/CreateCategory";
+import ManageCategory from "./pages/admin/manage-category/ManageCategory";
 
 const App = () => {
     return (
@@ -37,6 +39,14 @@ const App = () => {
                         <Route
                             path="manageProduct"
                             element={<ManageProduct />}
+                        />
+                        <Route
+                            path="createCategory"
+                            element={<CreateCategory />}
+                        />
+                        <Route
+                            path="manageCategory"
+                            element={<ManageCategory />}
                         />
                     </Route>
                 </Route>
