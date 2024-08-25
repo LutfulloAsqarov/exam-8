@@ -1,0 +1,45 @@
+.brands {
+    background: #000;
+}
+.scroll-container {
+    width: 100%;
+    margin: 0 auto;
+    overflow: hidden;
+    white-space: nowrap;
+    display: flex;
+    gap: 50px;
+
+    -webkit-mask-image: linear-gradient(
+        90deg,
+        transparent,
+        #fff 20%,
+        #fff 80%,
+        transparent
+    );
+}
+.hero__bottom {
+    background: #000;
+}
+.scroll-content {
+    display: flex;
+    gap: 50px;
+    background: black;
+
+    animation: scroll 20s linear infinite;
+}
+
+.item {
+    flex: 0 0 auto;
+    text-align: center;
+    padding: 20px 0 15px;
+    border-radius: 5px;
+}
+
+@keyframes scroll {
+    from {
+        transform: translateX(0);
+    }
+    to {
+        transform: translateX(-100%);
+    }
+}

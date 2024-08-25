@@ -73,6 +73,11 @@
     left: 0;
     z-index: 9999;
     background-color: white;
+    transition: all 0.3s ease;
+
+    &--shrink {
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    }
 
     &__nav {
         display: flex;

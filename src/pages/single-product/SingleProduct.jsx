@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useParams } from "react-router-dom";
 import {
     useGetProductByIdQuery,
@@ -17,7 +17,9 @@ const SingleProduct = () => {
 
     let product = data?.payload;
 
-    console.log(product);
+    useEffect(() => {
+        window.scrollTo(0, 0);
+    }, []);
 
     return (
         <div className="single">

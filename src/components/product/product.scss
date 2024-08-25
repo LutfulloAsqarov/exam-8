@@ -70,6 +70,22 @@
             display: grid;
             place-items: center;
         }
+        &__manage-btns {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            button {
+                padding: 8px;
+                width: 50%;
+                border: 1px solid #000;
+                border-radius: 5px;
+                transition: 0.3s;
+                &:hover {
+                    background: #000;
+                    color: #fff;
+                }
+            }
+        }
     }
     @media (max-width: 950px) {
         &__card {

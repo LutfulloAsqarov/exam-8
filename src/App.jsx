@@ -1,21 +1,31 @@
-import React, { Fragment } from "react";
+import React, { Fragment, lazy } from "react";
 import { Routes, Route } from "react-router-dom";
 import Layout from "./components/layout/Layout";
-import Home from "./pages/home/Home";
-import SingleProduct from "./pages/single-product/SingleProduct";
-import Cart from "./pages/cart/Cart";
-import Wishlist from "./pages/wishlist/Wishlist";
-import Casual from "./pages/casual/Casual";
-import Auth from "./pages/auth/Auth";
-import Login from "./pages/login/Login";
-import Admin from "./pages/admin/Admin";
-import CreateProduct from "./pages/admin/create-product/CreateProduct";
+const Home = lazy(() => import("./pages/home/Home"));
+const SingleProduct = lazy(() =>
+    import("./pages/single-product/SingleProduct")
+);
+const Cart = lazy(() => import("./pages/cart/Cart"));
+const Wishlist = lazy(() => import("./pages/wishlist/Wishlist"));
+const Casual = lazy(() => import("./pages/casual/Casual"));
+const Auth = lazy(() => import("./pages/auth/Auth"));
+const Login = lazy(() => import("./pages/login/Login"));
+const Admin = lazy(() => import("./pages/admin/Admin"));
+const CreateProduct = lazy(() =>
+    import("./pages/admin/create-product/CreateProduct")
+);
+const ManageProduct = lazy(() =>
+    import("./pages/admin/manage-product/ManageProduct")
+);
+const CreateCategory = lazy(() =>
+    import("./pages/admin/create-category/CreateCategory")
+);
+const ManageCategory = lazy(() =>
+    import("./pages/admin/manage-category/ManageCategory")
+);
 
-import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import ManageProduct from "./pages/admin/manage-product/ManageProduct";
-import CreateCategory from "./pages/admin/create-category/CreateCategory";
-import ManageCategory from "./pages/admin/manage-category/ManageCategory";
+import { ToastContainer, toast } from "react-toastify";
 
 const App = () => {
     return (

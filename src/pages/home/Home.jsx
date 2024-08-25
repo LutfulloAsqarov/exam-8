@@ -5,18 +5,20 @@ import NewProducts from "../../components/new-products/NewProducts";
 import TopProducts from "../../components/top-products/TopProducts";
 import Browse from "../../components/browse/Browse";
 import SwiperComp from "../../components/swiper/Swiper";
+import Brands from "../../components/brends/Brands";
+import ScrollManager from "../../components/scrollManager/ScrollManager";
 
 const Home = () => {
-  return (
-    <>
-      <Hero />
-      <Partner />
-      <NewProducts />
-      <TopProducts />
-      <Browse />
-      <SwiperComp />
-    </>
-  );
+    return (
+        <ScrollManager>
+            <Hero />
+            <Brands />
+            <NewProducts />
+            <TopProducts />
+            <Browse />
+            <SwiperComp />
+        </ScrollManager>
+    );
 };
 
 export default Home;

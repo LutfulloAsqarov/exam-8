@@ -1,131 +1,161 @@
-import React, { useEffect } from "react";
+import React, { useState, useEffect } from "react";
+import { Button, Form, Input, Upload, Select } from "antd";
+import { UploadOutlined } from "@ant-design/icons";
+// import { useCreateProductMutation } from "../../../context/api/productApi";
+// import { useGetCategorysQuery } from "../../../context/api/categoryApi";
+
 import "./createProduct.scss";
+import { useNavigate } from "react-router-dom";
 import { useCreateProductMutation } from "../../../context/api/productApi";
-import { useGetValue } from "../../../hooks/useGetValue";
-// import { useGetCategoriesQuery } from "../../../context/api/categoryApi";
-import { toast } from "react-toastify";
 import { useGetCategoriesQuery } from "../../../context/api/categoryApi";
 
-const initialState = {
-    title: "",
-    price: "",
-    oldPrice: "",
-    units: "",
-    categoryId: "",
-    desc: "",
-    urls: "",
-};
-
 const CreateProduct = () => {
-    const [createProduct, { isSuccess }] = useCreateProductMutation();
-    const { data: categoryData } = useGetCategoriesQuery();
-    const { formData, handleChange } = useGetValue(initialState);
+    const [fileList, setFileList] = useState([]);
+    const [newProduct, setNewProduct] = useState({});
+    const [create, { data, isLoading, isSuccess }] = useCreateProductMutation();
+    const { data: categories } = useGetCategoriesQuery();
 
-    useEffect(() => {
-        if (isSuccess) {
-            toast.success("Product Yaratildi");
-            // formData.title = "";
-            // formData.price = "";
-            // formData.oldPrice = "";
-            // formData.units = "";
-            // formData.categoryId = "";
-            // formData.desc = "";
-            // formData.urls = "";
-        }
-    }, [isSuccess]);
-
-    const handleSubmit = (e) => {
-        e.preventDefault();
-
-        createProduct(formData);
+    const handleFileChange = ({ fileList }) => {
+        setFileList(fileList);
     };
 
-    console.log(categoryData?.payload);
+    const handleSubmit = async (values) => {
+        const formData = new FormData();
 
-    let categoryItems = categoryData?.payload?.map((el) => (
-        <option key={el._id} value={el._id}>
-            {el.title}
-        </option>
-    ));
+        formData.append("title", values.title);
+        formData.append("price", values.price);
+        formData.append("desc", values.desc);
+        formData.append("units", values.units);
+        formData.append("categoryId", values.categoryId);
+        fileList.forEach((file) =>
+            formData.append("photos", file.originFileObj)
+        );
+
+        await create(formData).unwrap();
+    };
+
+    const onFinishFailed = (errorInfo) => {
+        console.log("Failed:", errorInfo);
+    };
 
     return (
-        <div>
-            <div className="createProduct">
-                <h1>Create Product</h1>
-                <form
-                    action=""
-                    className="createProduct__form"
-                    onSubmit={handleSubmit}
+        <div className="form-category">
+            <h2>Create Product</h2>
+            <Form
+                name="basic"
+                layout="vertical"
+                className="w-96 max-sm:w-400px"
+                labelCol={{
+                    span: 8,
+                }}
+                initialValues={{
+                    remember: true,
+                }}
+                onFinish={handleSubmit}
+                onFinishFailed={onFinishFailed}
+                autoComplete="off"
+            >
+                <Form.Item
+                    label="Title"
+                    name="title"
+                    rules={[
+                        {
+                            required: true,
+                            message: "Please input the title!",
+                        },
+                    ]}
                 >
-                    <div className="createProduct__input">
-                        <label htmlFor="title">Title</label>
-                        <input
-                            type="text"
-                            name="title"
-                            value={formData.title}
-                            onChange={handleChange}
-                        />
-                    </div>
-                    <div className="createProduct__input">
-                        <label htmlFor="price">Price</label>
-                        <input
-                            type="text"
-                            name="price"
-                            value={formData.price}
-                            onChange={handleChange}
-                        />
-                    </div>
-                    <div className="createProduct__input">
-                        <label htmlFor="price">Units</label>
-                        <input
-                            type="text"
-                            name="units"
-                            value={formData.units}
-                            onChange={handleChange}
-                        />
-                    </div>
-                    <div className="createProduct__input">
-                        <label htmlFor="price">Old Price</label>
-                        <input
-                            type="text"
-                            name="oldPrice"
-                            value={formData.oldPrice}
-                            onChange={handleChange}
-                        />
-                    </div>
-                    <div className="createProduct__input">
-                        <label htmlFor="image">Images</label>
-                        <input
-                            type="file"
-                            name="urls"
-                            value={formData.urls}
-                            onChange={handleChange}
-                        />
-                    </div>
-                    <div className="createProduct__input">
-                        <label htmlFor="category">Category</label>
-                        <select
-                            name="categoryId"
-                            value={formData.categoryId}
-                            onChange={handleChange}
-                        >
-                            <option value="">Tanlang</option>
-                            {categoryItems}
-                        </select>
-                    </div>
-                    <div className="createProduct__input">
-                        <label htmlFor="desc">Desc</label>
-                        <textarea
-                            id=""
-                            rows={4}
-                            name="desc"
-                            value={formData.desc}
-                            onChange={handleChange}
-                        ></textarea>
-                    </div>
-                    <button>Create</button>
-                </form>
-            </div>
+                    <Input placeholder="Enter title" />
+                </Form.Item>
+
+                <Form.Item
+                    label="Description"
+                    name="desc"
+                    rules={[
+                        {
+                            required: true,
+                            message: "Please input the description!",
+                        },
+                    ]}
+                >
+                    <Input placeholder="Enter description" />
+                </Form.Item>
+
+                <Form.Item
+                    label="Price"
+                    name="price"
+                    rules={[
+                        {
+                            required: true,
+                            message: "Please input the price!",
+                        },
+                    ]}
+                >
+                    <Input placeholder="Enter price" />
+                </Form.Item>
+
+                <Form.Item
+                    label="Units"
+                    name="units"
+                    rules={[
+                        {
+                            required: true,
+                            message: "Please input the units!",
+                        },
+                    ]}
+                >
+                    <Input placeholder="Enter units" />
+                </Form.Item>
+
+                <Form.Item
+                    label="Category"
+                    name="categoryId"
+                    rules={[
+                        {
+                            required: true,
+                            message: "Please select a category!",
+                        },
+                    ]}
+                >
+                    <Select placeholder="Select a category" className="select">
+                        {categories?.payload?.map((category) => (
+                            <Select.Option
+                                key={category._id}
+                                value={category?._id}
+                            >
+                                {category.title}
+                            </Select.Option>
+                        ))}
+                    </Select>
+                </Form.Item>
+
+                <Form.Item>
+                    <Upload
+                        action="https://660d2bd96ddfa2943b33731c.mockapi.io/api/upload"
+                        listType="picture"
+                        multiple
+                        beforeUpload={() => false}
+                        onChange={handleFileChange}
+                        fileList={fileList}
+                        defaultFileList={fileList}
+                    >
+                        <Button type="dark" icon={<UploadOutlined />}>
+                            Upload
+                        </Button>
+                    </Upload>
+                </Form.Item>
+
+                <Form.Item>
+                    <Button
+                        loading={isLoading}
+                        className="w-full"
+                        type="dark"
+                        htmlType="submit"
+                    >
+                        {isLoading ? "Loading..." : "Create"}
+                    </Button>
+                </Form.Item>
+            </Form>
         </div>
     );
 };

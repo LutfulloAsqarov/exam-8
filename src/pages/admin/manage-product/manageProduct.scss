@@ -10,3 +10,10 @@
         width: calc(25% - 18px);
     }
 }
+
+.manage-products__pagination {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 30px 0;
+}
