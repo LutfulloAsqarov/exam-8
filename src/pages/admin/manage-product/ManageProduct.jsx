@@ -169,11 +169,10 @@ const ManageProduct = () => {
                             loading={isLoading}
                             className="w-full"
                             type="dark"
-                            // htmlType="submit"
+                            htmlType="submit"
                         >
                             {isLoading ? "" : "Save"}
                         </Button>
-                        {/* <button>Save</button> */}
                     </form>
                 </Model>
             ) : (
