@@ -7,7 +7,6 @@ const SingleProduct = lazy(() =>
 );
 const Cart = lazy(() => import("./pages/cart/Cart"));
 const Wishlist = lazy(() => import("./pages/wishlist/Wishlist"));
-const Casual = lazy(() => import("./pages/casual/Casual"));
 const Auth = lazy(() => import("./pages/auth/Auth"));
 const Login = lazy(() => import("./pages/login/Login"));
 const Admin = lazy(() => import("./pages/admin/Admin"));
@@ -23,6 +22,7 @@ const CreateCategory = lazy(() =>
 const ManageCategory = lazy(() =>
     import("./pages/admin/manage-category/ManageCategory")
 );
+const Shop = lazy(() => import("./pages/shop/Shop"));
 
 import "react-toastify/dist/ReactToastify.css";
 import { ToastContainer, toast } from "react-toastify";
@@ -36,7 +36,7 @@ const App = () => {
                     <Route path="/cart" element={<Cart />} />
                     <Route path="/wishlist" element={<Wishlist />} />
                     <Route path="/product/:id" element={<SingleProduct />} />
-                    <Route path="/casual" element={<Casual />} />
+                    <Route path="/shop" element={<Shop />} />
                 </Route>
                 <Route path="/login" element={<Login />} />
 
