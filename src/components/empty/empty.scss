@@ -1,0 +1,20 @@
+.empty {
+    display: grid;
+    place-items: center;
+    padding: 50px 0;
+    gap: 30px;
+    h2 {
+        font-size: 36px;
+    }
+    img {
+        max-width: 500px;
+        width: 100%;
+    }
+    a {
+        background: #000;
+        color: #fff;
+        padding: 10px 30px;
+        font-size: 16px;
+        border-radius: 50px;
+    }
+}

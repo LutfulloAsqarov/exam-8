@@ -1,0 +1,28 @@
+.createCategory {
+    padding: 30px;
+    &__form {
+        display: flex;
+        flex-direction: column;
+        align-items: self-start;
+        padding: 20px 0;
+
+        button {
+            background: #000;
+            color: #fff;
+        }
+    }
+    &__input {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+        padding: 20px 0;
+        input {
+            width: 100%;
+            height: 40px;
+            padding: 0 10px;
+            margin-top: 10px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+        }
+    }
+}

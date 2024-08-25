@@ -11,6 +11,7 @@ import { Pagination, Stack } from "@mui/material";
 import { useGetCategoriesQuery } from "../../../context/api/categoryApi";
 import { useGetProfileQuery } from "../../../context/api/adminApi";
 import { Button } from "antd";
+import Loading from "../../../components/loading/Loading";
 
 // const initialState = {
 //     title: "",
@@ -23,10 +24,14 @@ import { Button } from "antd";
 const ManageProduct = () => {
     const [editProduct, setEditProduct] = useState(null);
     const [page, setPage] = useState(1);
-    const [updateProduct, { isLoading }] = useUpdateProductMutation();
+    const [updateProduct, { isLoading, isSuccess }] =
+        useUpdateProductMutation();
     let limit = 8;
 
-    let { data } = useGetProductsQuery({ limit, skip: page });
+    let { data, isLoading: productsLoading } = useGetProductsQuery({
+        limit,
+        skip: page,
+    });
     const { data: categories } = useGetCategoriesQuery();
     const pageCount = Math.ceil(data?.total / limit) || 0;
     let { data: profile } = useGetProfileQuery();
@@ -34,6 +39,7 @@ const ManageProduct = () => {
     const handleChange = (event, value) => {
         setPage(value);
     };
+
     // const handleEdit = (el) => {
     //     setEditProduct(el);
     // };
@@ -51,8 +57,11 @@ const ManageProduct = () => {
         };
         console.log(updatePro);
         updateProduct({ body: updatePro, id: editProduct._id });
-        // setEditProduct(false);
     };
+
+    useEffect(() => {
+        setEditProduct(null);
+    }, [isSuccess]);
 
     let categoryItems = categories?.payload?.map((el) => (
         <option key={el.id} value={el._id}>
@@ -62,13 +71,16 @@ const ManageProduct = () => {
 
     return (
         <div className="products manageProduct">
-            <div className="products__cards manageProduct__cards">
-                <Products
-                    // key={el._id}
-                    data={data?.payload}
-                    setEditProduct={setEditProduct}
-                />
-            </div>
+            {productsLoading ? (
+                <Loading limit={4} />
+            ) : (
+                <div className="products__cards manageProduct__cards">
+                    <Products
+                        data={data?.payload}
+                        setEditProduct={setEditProduct}
+                    />
+                </div>
+            )}
 
             <div className="manage-products__pagination">
                 <Stack spacing={2}>
@@ -84,10 +96,10 @@ const ManageProduct = () => {
                 <Model width={600} close={setEditProduct}>
                     <form
                         action=""
-                        className="createProduct__form"
+                        className="manageProduct__form"
                         onSubmit={handleUpdatedUser}
                     >
-                        <div className="createProduct__input">
+                        <div className="manageProduct__input">
                             <label htmlFor="title">Title</label>
                             <input
                                 type="text"
@@ -102,7 +114,7 @@ const ManageProduct = () => {
                                 }
                             />
                         </div>
-                        <div className="createProduct__input">
+                        <div className="manageProduct__input">
                             <label htmlFor="price">Price</label>
                             <input
                                 type="text"
@@ -117,7 +129,7 @@ const ManageProduct = () => {
                                 }
                             />
                         </div>
-                        <div className="createProduct__input">
+                        <div className="manageProduct__input">
                             <label htmlFor="units">Units</label>
                             <input
                                 type="text"
@@ -133,7 +145,7 @@ const ManageProduct = () => {
                             />
                         </div>
 
-                        <div className="createProduct__input">
+                        <div className="manageProduct__input">
                             <label htmlFor="category">Category</label>
                             <select
                                 name="category"
@@ -148,7 +160,7 @@ const ManageProduct = () => {
                                 {categoryItems}
                             </select>
                         </div>
-                        <div className="createProduct__input">
+                        <div className="manageProduct__input">
                             <label htmlFor="desc">Desc</label>
                             <textarea
                                 name="desc"

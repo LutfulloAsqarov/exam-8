@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Model from "../../../components/model/Model";
 
 import {
@@ -6,12 +6,15 @@ import {
     useGetCategoriesQuery,
     useUpdateCategoryMutation,
 } from "../../../context/api/categoryApi";
+import { Button } from "antd";
 
 const ManageCategory = () => {
-    let [deleteCategory] = useDeleteCategoryMutation();
+    let [deleteCategory, { isLoading: delLoading, isSuccess: delSuccess }] =
+        useDeleteCategoryMutation();
     const [catId, setCatId] = useState(null);
     const [editCategory, setEditCategory] = useState(null);
-    const [updateCategory] = useUpdateCategoryMutation();
+    const [updateCategory, { isLoading, isSuccess }] =
+        useUpdateCategoryMutation();
     const { data: categoryData } = useGetCategoriesQuery();
 
     const handleUpdatedUser = (e) => {
@@ -20,11 +23,19 @@ const ManageCategory = () => {
             title: editCategory.title,
         };
         updateCategory({ body: updatePro, id: editCategory._id });
-        setEditCategory(false);
     };
 
+    useEffect(() => {
+        if (isSuccess) {
+            setEditCategory(false);
+        }
+        if (delSuccess) {
+            setCatId(null);
+        }
+    }, [isSuccess, delSuccess]);
+
     return (
-        <div className="products manageProduct">
+        <div className="products manageProduct" style={{ padding: "30px" }}>
             <div
                 style={{
                     display: "flex",
@@ -39,15 +50,37 @@ const ManageCategory = () => {
                         style={{
                             display: "flex",
                             alignItems: "center",
+                            justifyContent: "space-between",
                             gap: "30px",
+                            width: "300px",
+                            padding: "20px",
+                            boxShadow: "0 0 10px #ddd",
+                            borderRadius: "8px",
                         }}
                     >
                         <p>{el.title}</p>
-                        <div className="products__card__manage-btns">
-                            <button onClick={() => setEditCategory(el)}>
+                        <div
+                            className="products__card__manage-btns"
+                            style={{ display: "flex", gap: "6px" }}
+                        >
+                            <button
+                                onClick={() => setEditCategory(el)}
+                                style={{
+                                    padding: "5px 8px",
+                                    border: "1px solid #ddd",
+                                    borderRadius: "4px",
+                                }}
+                            >
                                 Edit
                             </button>
-                            <button onClick={() => setCatId(el._id)}>
+                            <button
+                                onClick={() => setCatId(el._id)}
+                                style={{
+                                    padding: "5px 8px",
+                                    border: "1px solid #ddd",
+                                    borderRadius: "4px",
+                                }}
+                            >
                                 Delete
                             </button>
                         </div>
@@ -57,15 +90,18 @@ const ManageCategory = () => {
             {catId ? (
                 <Model close={setCatId} width={300}>
                     <h2 style={{ textAlign: "center" }}>Are you sure</h2>
-                    <div style={{ display: "flex" }}>
-                        <button
+                    <div style={{ display: "flex", gap: "6px" }}>
+                        <Button
+                            loading={delLoading}
+                            className="w-full"
+                            type="dark"
+                            htmlType="submit"
                             onClick={() => {
                                 deleteCategory(catId);
-                                setCatId(null);
                             }}
                         >
-                            Yes
-                        </button>
+                            {isLoading ? "" : "Yes"}
+                        </Button>
                         <button onClick={() => setCatId(null)}>No</button>
                     </div>
                 </Model>
@@ -95,7 +131,14 @@ const ManageCategory = () => {
                             />
                         </div>
 
-                        <button>Save</button>
+                        <Button
+                            loading={isLoading}
+                            className="w-full"
+                            type="dark"
+                            htmlType="submit"
+                        >
+                            {isLoading ? "Loading..." : "Save"}
+                        </Button>
                     </form>
                 </Model>
             ) : (

@@ -7,9 +7,10 @@ import {
 import "./singleProduct.scss";
 import { GoStarFill } from "react-icons/go";
 import Products from "../../components/products/Products";
+import Loading from "../../components/loading/Loading";
 
 const SingleProduct = () => {
-    const { data: products } = useGetProductsQuery();
+    const { data: products, isLoading } = useGetProductsQuery();
 
     let { id } = useParams();
 
@@ -100,9 +101,13 @@ const SingleProduct = () => {
                     </div>
                     <div className="single__like__cards">
                         <h2 className="section-title">You might also like</h2>
-                        <div className="new__products">
-                            <Products data={products?.payload} />
-                        </div>
+                        {isLoading ? (
+                            <Loading limit={4} />
+                        ) : (
+                            <div className="new__products">
+                                <Products data={products?.payload} />
+                            </div>
+                        )}
                     </div>
                 </div>
             </div>

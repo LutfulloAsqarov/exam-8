@@ -151,6 +151,7 @@ const CreateProduct = () => {
                         className="w-full"
                         type="dark"
                         htmlType="submit"
+                        style={{ background: "#000", color: "#fff" }}
                     >
                         {isLoading ? "Loading..." : "Create"}
                     </Button>

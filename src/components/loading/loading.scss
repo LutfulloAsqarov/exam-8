@@ -57,13 +57,13 @@
 
 @media (max-width: 800px) {
     .loading__wrapper {
-        grid-template-columns: repeat(3, 1fr);
+        grid-template-columns: repeat(3, 1fr) !important;
         gap: 10px;
     }
 }
 @media (max-width: 650px) {
     .loading__wrapper {
-        grid-template-columns: repeat(2, 1fr);
+        grid-template-columns: repeat(2, 1fr) !important;
     }
 }
 @media (max-width: 450px) {
@@ -73,6 +73,6 @@
 }
 @media (max-width: 350px) {
     .loading__wrapper {
-        grid-template-columns: 1fr;
+        grid-template-columns: 1fr !important;
     }
 }

@@ -5,7 +5,9 @@ import {
 } from "../../../context/api/categoryApi";
 import { useGetValue } from "../../../hooks/useGetValue";
 import { toast } from "react-toastify";
+import { Button } from "antd";
 
+import "./createCategory.scss";
 const initialState = {
     title: "",
 };
@@ -30,14 +32,14 @@ const CreateCategory = () => {
 
     return (
         <div>
-            <div className="createProduct">
+            <div className="createCategory">
                 <h1>Create Category</h1>
                 <form
                     action=""
-                    className="createProduct__form"
+                    className="createCategory__form"
                     onSubmit={handleSubmit}
                 >
-                    <div className="createProduct__input">
+                    <div className="createCategory__input">
                         <label htmlFor="title">Category</label>
                         <input
                             type="text"
@@ -46,10 +48,14 @@ const CreateCategory = () => {
                             onChange={handleChange}
                         />
                     </div>
-
-                    <button disabled={isLoading} className="create-btn">
-                        {isLoading ? "sabr..." : "Create"}
-                    </button>
+                    <Button
+                        loading={isLoading}
+                        className="w-full"
+                        type="dark"
+                        htmlType="submit"
+                    >
+                        {isLoading ? "Loading..." : "Create"}
+                    </Button>
                 </form>
             </div>
         </div>

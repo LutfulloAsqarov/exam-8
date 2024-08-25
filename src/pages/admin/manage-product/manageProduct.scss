@@ -6,6 +6,16 @@
         flex-wrap: wrap;
         gap: 24px;
     }
+    &__form {
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
+    }
+    &__input {
+        input {
+            margin-top: 5px;
+        }
+    }
     .products__card {
         width: calc(25% - 18px);
     }

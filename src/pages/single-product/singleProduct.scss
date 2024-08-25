@@ -1,7 +1,6 @@
 .single {
     &__details {
         display: flex;
-        // justify-content: space-between;
         gap: 30px;
     }
     &__images {
@@ -18,6 +17,7 @@
             display: flex;
             flex-direction: column;
             gap: 14px;
+            height: 100%;
             span {
                 border-radius: 20px;
                 min-height: calc(33.3% - 9.33px);
@@ -31,9 +31,9 @@
                 object-fit: cover;
             }
         }
+
         &__main {
             width: 100%;
-            // height: 450px;
             height: 100%;
             border-radius: 20px;
             overflow: hidden;
@@ -122,6 +122,7 @@
             &__items {
                 display: flex;
                 align-items: center;
+                flex-wrap: wrap;
                 gap: 12px;
                 button {
                     padding: 12px 24px;
@@ -185,5 +186,54 @@
 
     &__like__cards {
         padding: 60px 0 0;
+    }
+
+    @media (max-width: 1000px) {
+        &__images {
+            display: flex;
+            flex-direction: column-reverse;
+            align-items: center;
+            &__exams {
+                height: 200px;
+                span {
+                    background: #ddd;
+                    width: 33.3%;
+                }
+                img {
+                    height: 100%;
+                    object-fit: contain;
+                }
+            }
+        }
+    }
+    @media (max-width: 750px) {
+        &__info {
+            .counter {
+                width: 120px;
+                gap: 10px;
+                button {
+                    height: 50px;
+                    padding: 14px 10px;
+                    font-size: 24px;
+                }
+            }
+        }
+    }
+    @media (max-width: 750px) {
+        &__details {
+            flex-direction: column;
+        }
+        &__images {
+            width: 100%;
+            &__exams {
+                height: 120px;
+            }
+            &__main {
+                height: 360px;
+            }
+        }
+        &__info {
+            width: 100%;
+        }
     }
 }
