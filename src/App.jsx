@@ -24,6 +24,7 @@ const ManageCategory = lazy(() =>
 );
 const Shop = lazy(() => import("./pages/shop/Shop"));
 const Empty = lazy(() => import("./components/empty/Empty"));
+const Brands = lazy(() => import("./pages/brands/Brands"));
 
 import "react-toastify/dist/ReactToastify.css";
 import { ToastContainer, toast } from "react-toastify";
@@ -40,6 +41,7 @@ const App = () => {
             <Routes>
                 <Route element={<Layout />}>
                     <Route path="/" element={<Home />} />
+                    <Route path="/brands" element={<Brands />} />
                     <Route
                         path="/cart"
                         element={

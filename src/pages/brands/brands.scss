@@ -1,0 +1,9 @@
+.our-brands {
+    display: flex;
+    align-items: center;
+    gap: 24px;
+    flex-wrap: wrap;
+    img {
+        width: calc(25% - 18px);
+    }
+}

@@ -8,10 +8,12 @@ import {
     incrementCart,
     removeFromCart,
 } from "../../context/slices/cartSlice";
+import CartModel from "../../components/cartModel/CartModel";
 const Cart = () => {
     const [totalPrice, setTotalPrice] = useState(0);
     const dispatch = useDispatch();
     let cartData = useSelector((state) => state.cart.value);
+    const [open, setOpen] = useState(false);
 
     let cartItems = cartData?.map((el) => (
         <div key={el._id} className="cart__product">
@@ -71,44 +73,56 @@ const Cart = () => {
     }, [cartData]);
 
     return (
-        <div id="cart">
-            <div className="container">
-                <div className="cart">
-                    <h1 className="section-title">YOUR CART</h1>
-                    <div className="cart__wrapper">
-                        <div className="cart__left">
-                            <div className="cart__products">{cartItems}</div>
-                        </div>
-                        <div className="cart__right">
-                            <div className="cart__order">
-                                <h3>Order Summary</h3>
-                                <ul>
-                                    <li>
-                                        <span>Subtotal</span>{" "}
-                                        <p>${totalPrice}</p>
-                                    </li>
-                                    <li>
-                                        <span>Discount(-20%)</span>
-                                        <p>-${totalPrice * 0.2}</p>
-                                    </li>
-                                    <li>
-                                        <span>Delivery Fee</span> <p>$15</p>
-                                    </li>
-                                    <li>
-                                        <span>Total</span>
-                                        <p>
-                                            $
-                                            {totalPrice + 15 - totalPrice * 0.2}
-                                        </p>
-                                    </li>
-                                </ul>
-                                <button>Go to Checkout</button>
+        <>
+            <div id="cart">
+                <div className="container">
+                    <div className="cart">
+                        <h1 className="section-title">YOUR CART</h1>
+                        <div className="cart__wrapper">
+                            <div className="cart__left">
+                                <div className="cart__products">
+                                    {cartItems}
+                                </div>
+                            </div>
+                            <div className="cart__right">
+                                <div className="cart__order">
+                                    <h3>Order Summary</h3>
+                                    <ul>
+                                        <li>
+                                            <span>Subtotal</span>{" "}
+                                            <p>${totalPrice}</p>
+                                        </li>
+                                        <li>
+                                            <span>Discount(-20%)</span>
+                                            <p>
+                                                -$
+                                                {(totalPrice * 0.2).toFixed(2)}
+                                            </p>
+                                        </li>
+                                        <li>
+                                            <span>Delivery Fee</span> <p>$15</p>
+                                        </li>
+                                        <li>
+                                            <span>Total</span>
+                                            <p>
+                                                $
+                                                {totalPrice +
+                                                    15 -
+                                                    totalPrice * 0.2}
+                                            </p>
+                                        </li>
+                                    </ul>
+                                    <button onClick={() => setOpen(true)}>
+                                        Go to Checkout
+                                    </button>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
+            {open ? <CartModel setOpen={setOpen} /> : <></>}
+        </>
     );
 };
 

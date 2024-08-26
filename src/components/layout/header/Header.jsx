@@ -87,7 +87,9 @@ const Header = () => {
                         <li className="header__nav__item">
                             <Link to={"/shop"}>Shop</Link>
                         </li>
-                        <li className="header__nav__item">Brands</li>
+                        <li className="header__nav__item">
+                            <Link to={"/brands"}>Brands</Link>
+                        </li>
                     </ul>
                     <div className="header__nav__form">
                         <Search />

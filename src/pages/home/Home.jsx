@@ -5,14 +5,14 @@ import NewProducts from "../../components/new-products/NewProducts";
 import TopProducts from "../../components/top-products/TopProducts";
 import Browse from "../../components/browse/Browse";
 import SwiperComp from "../../components/swiper/Swiper";
-import Brands from "../../components/brends/Brands";
+import BrandsSlider from "../../components/brends-slider/BrandsSlider";
 import ScrollManager from "../../components/scrollManager/ScrollManager";
 
 const Home = () => {
     return (
         <ScrollManager>
             <Hero />
-            <Brands />
+            <BrandsSlider />
             <NewProducts />
             <TopProducts />
             <Browse />
